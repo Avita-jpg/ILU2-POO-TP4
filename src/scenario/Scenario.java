@@ -1,4 +1,4 @@
-package scenarioTest;
+package scenario;
 
 import personnages.Gaulois;
 import villagegaulois.Etal;
