@@ -1,7 +1,7 @@
 package scenario;
 
 import personnages.Gaulois;
-import villagegaulois.Etal;
+import villagegauloisold.Etal;
 
 public class Scenario {
 

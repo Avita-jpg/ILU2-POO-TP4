@@ -4,11 +4,12 @@ public class Poisson extends Produit {
 
 	private String datePeche;
 	
-	public Poisson(String nom, Unite unite, String datePeche) {
-		super(nom, unite);
+	public Poisson(String datePeche) {
+		super("poisson", Unite.PARPIECE);
 		this.datePeche = datePeche;
 	}
 	
+
 	@Override
 	public String donnerDescription() {
 		return getNom() + " pêchés " + datePeche;
