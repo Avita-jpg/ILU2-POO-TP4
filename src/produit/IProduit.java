@@ -8,4 +8,6 @@ public interface IProduit {
 
 	String donnerDescription();
 
+	double calculerPrix(int prix);
+
 }

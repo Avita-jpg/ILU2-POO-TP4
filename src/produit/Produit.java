@@ -18,9 +18,6 @@ public abstract class Produit implements IProduit {
 	public Unite getUnite() {
 			return unite;
 		}
-	
-	@Override
-	public abstract String donnerDescription();
 
 	
 }

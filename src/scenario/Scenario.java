@@ -1,6 +1,12 @@
 package scenario;
 
 import personnages.Gaulois;
+import produit.Poisson;
+import produit.Produit;
+import produit.Sanglier;
+import village.IVillage;
+import villagegaulois.DepenseMarchand;
+import villagegaulois.IEtal;
 import villagegauloisold.Etal;
 
 public class Scenario {
@@ -8,7 +14,47 @@ public class Scenario {
 	public static void main(String[] args) {
 
 		// TODO Partie 4 : creer de la classe anonyme Village
+		
+		class Village implements IVillage {
+			IEtal[] marche; //????
+			int nbEtalsOccupes = 0;
+			
+			public Village(int nbEtalsMax) {
+				marche = new IEtal[nbEtalsMax];
+			}
+			
+			@Override
+			public <P extends Produit> boolean installerVendeur(villagegaulois.Etal<P> etal, Gaulois vendeur,
+					P[] produit, int prix) {
+				if (nbEtalsOccupes == marche.length)
+					return false;
 
+				etal.installerVendeur(vendeur, produit, prix);
+				marche[nbEtalsOccupes] = etal;
+				nbEtalsOccupes++;
+				return true;
+			}
+
+			@Override
+			public DepenseMarchand[] acheterProduit(String produit, int quantiteSouhaitee) {
+				DepenseMarchand[] depense = new DepenseMarchand[nbEtalsOccupes];
+				int numEtal = 0;
+				int quantiteAchetee = 0;
+				while (quantiteAchetee < quantiteSouhaitee && numEtal < nbEtalsOccupes) {
+					int quantiteAAcheter = quantiteSouhaitee - quantiteAchetee;
+					int qteDispo = marche[numEtal].contientProduit(produit, quantiteAAcheter);
+					if (qteDispo <= quantiteAAcheter) {
+						quantiteAAcheter = qteDispo;
+					}
+					double prixPaye = marche[numEtal].acheterProduit(quantiteAAcheter);
+					depense[numEtal] = new DepenseMarchand(marche[numEtal].getVendeur(), quantiteAAcheter, produit, prixPaye);
+					numEtal++;
+				}
+			}	
+		}
+		
+		Village village = new Village(3);
+		
 		// fin
 
 		Gaulois ordralfabetix = new Gaulois("Ordralfabétix", 9);
@@ -30,6 +76,7 @@ public class Scenario {
 		Poisson poisson1 = new Poisson("lundi");
 		Poisson[] poissons = { poisson1 };
 
+		
 		village.installerVendeur(etalSanglierAsterix, asterix, sangliersAsterix, 10);
 		village.installerVendeur(etalSanglierObelix, obelix, sangliersObelix, 8);
 		village.installerVendeur(etalPoisson, ordralfabetix, poissons, 5);

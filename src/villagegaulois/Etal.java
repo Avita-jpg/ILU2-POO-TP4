@@ -2,7 +2,6 @@ package villagegaulois;
 
 import personnages.Gaulois;
 import produit.IProduit;
-import produit.Produit;
 
 public class Etal<P extends IProduit> implements IEtal {
 
@@ -16,6 +15,7 @@ public class Etal<P extends IProduit> implements IEtal {
 		this.produits = produit;
 		this.nbProduit = produit.length;
 		this.prix = prix;
+		System.out.println("Le vendeur "+vendeur+" vend les "+produit[0].getNom()+" qu'il a chassÃ© au prix de "+prix+" sous.");
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class Etal<P extends IProduit> implements IEtal {
 				chaine.append("\n- " + produits[i].donnerDescription());
 			}
 		} else {
-			chaine.append(" n'a plus rien à vendre.");
+			chaine.append(" n'a plus rien ï¿½ vendre.");
 		}
 		chaine.append("\n");
 		return chaine.toString();

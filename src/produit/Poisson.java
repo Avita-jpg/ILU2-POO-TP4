@@ -12,6 +12,13 @@ public class Poisson extends Produit {
 
 	@Override
 	public String donnerDescription() {
-		return getNom() + " pêchés " + datePeche;
+		return getNom() + " pï¿½chï¿½s " + datePeche;
+	}
+
+
+	@Override
+	public double calculerPrix(int prix) {
+		// puisque le poisson est vendu par piÃ¨ce, le prix ne change pas
+		return prix;
 	}
 }

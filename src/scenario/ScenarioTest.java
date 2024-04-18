@@ -4,13 +4,14 @@ import personnages.Gaulois;
 import produit.Poisson;
 import produit.Sanglier;
 import villagegaulois.Etal;
+import villagegaulois.IEtal;
 
 
 public class ScenarioTest {
 	public static void main(String[] args) {
 
-		Gaulois ordralfabetix = new Gaulois("Ordralfabétix",9);
-		Gaulois obelix = new Gaulois("Obélix",20);
+		Gaulois ordralfabetix = new Gaulois("Ordralfabï¿½tix",9);
+		Gaulois obelix = new Gaulois("Obï¿½lix",20);
 		Gaulois asterix = new Gaulois("Asterix", 6);
 		
 		Sanglier sanglier1 = new Sanglier(2000, obelix);
@@ -23,7 +24,7 @@ public class ScenarioTest {
 		Poisson[] poissons = {poisson1};
 		
 		
-		Etal[] marche = new Etal[5];
+		IEtal[] marche = new IEtal[3];
 		Etal<Sanglier> etalSanglier1 = new Etal<>();
 		Etal<Sanglier> etalSanglier2 = new Etal<>();
 		
@@ -33,6 +34,35 @@ public class ScenarioTest {
 		marche[1] = etalSanglier2;
 		marche[2] = etalPoisson1;
 		
+		etalSanglier1.installerVendeur(asterix, sangliersAsterix, 10);
+		etalSanglier2.installerVendeur(obelix, sangliersObelix, 8);
+		etalPoisson1.installerVendeur(ordralfabetix, poissons, 7);
+		
+		System.out.println("ETAT MARCHE");
+		for (int i = 0; i < marche.length; i++) {
+			System.out.println(marche[i].etatEtal());
+		}
+		
+		int quantiteSouhaitee = 3;
+		int quantiteAcheter = quantiteSouhaitee;
+		int etal = 0;
+		while (quantiteAcheter > 0 && etal < marche.length) {
+			int qte = marche[etal].contientProduit("sanglier", quantiteAcheter);
+			if (qte > quantiteAcheter) {
+				qte = quantiteAcheter;
+			}
+			double prixPaye = marche[etal].acheterProduit(qte);
+			quantiteAcheter-=qte;
+			System.out.println("A l'Ã©tal "+etal+" je paye "+prixPaye+" sous.");
+			
+			etal++;
+		}
+		System.out.println("Je voulais "+quantiteSouhaitee+" sangliers, j'en ai achetÃ© "+ (quantiteSouhaitee-quantiteAcheter));
+		
+		System.out.println("ETAT MARCHE");
+		for (int i = 0; i < marche.length; i++) {
+			System.out.println(marche[i].etatEtal());
+		}
 	}
 	
 }
