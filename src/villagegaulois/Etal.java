@@ -15,7 +15,7 @@ public class Etal<P extends IProduit> implements IEtal {
 		this.produits = produit;
 		this.nbProduit = produit.length;
 		this.prix = prix;
-		System.out.println("Le vendeur "+vendeur+" vend les "+produit[0].getNom()+" qu'il a chassé au prix de "+prix+" sous.");
+		//System.out.println("Le vendeur "+vendeur.getNom()+" vend les "+produit[0].getNom()+" qu'il a chassé au prix de "+prix+" sous.");
 	}
 	
 	@Override

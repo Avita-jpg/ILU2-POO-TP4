@@ -43,21 +43,37 @@ public class ScenarioTest {
 			System.out.println(marche[i].etatEtal());
 		}
 		
+//		int quantiteSouhaitee = 3;
+//		int quantiteAcheter = quantiteSouhaitee;
+//		int etal = 0;
+//		while (quantiteAcheter > 0 && etal < marche.length) {
+//			int qte = marche[etal].contientProduit("sanglier", quantiteAcheter);
+//			if (qte > quantiteAcheter) {
+//				qte = quantiteAcheter;
+//			}
+//			double prixPaye = marche[etal].acheterProduit(qte);
+//			quantiteAcheter-=qte;
+//			System.out.println("A l'étal "+etal+" je paye "+prixPaye+" sous.");
+//			
+//			etal++;
+//		}
+		
 		int quantiteSouhaitee = 3;
-		int quantiteAcheter = quantiteSouhaitee;
-		int etal = 0;
-		while (quantiteAcheter > 0 && etal < marche.length) {
-			int qte = marche[etal].contientProduit("sanglier", quantiteAcheter);
-			if (qte > quantiteAcheter) {
-				qte = quantiteAcheter;
+		int numEtal = 0;
+		int quantiteAchetee = 0;
+		while (quantiteAchetee < quantiteSouhaitee && numEtal < marche.length) {
+			int quantiteAAcheter = quantiteSouhaitee - quantiteAchetee;
+			int qteDispo = marche[numEtal].contientProduit("sanglier", quantiteAAcheter);
+			if (qteDispo <= quantiteAAcheter) {
+				quantiteAAcheter = qteDispo;
 			}
-			double prixPaye = marche[etal].acheterProduit(qte);
-			quantiteAcheter-=qte;
-			System.out.println("A l'étal "+etal+" je paye "+prixPaye+" sous.");
-			
-			etal++;
+			double prixPaye = marche[numEtal].acheterProduit(quantiteAAcheter);
+			quantiteAchetee += quantiteAAcheter;
+			System.out.println("A l'étal "+numEtal+" je paye "+prixPaye+" sous.");
+			numEtal++;
 		}
-		System.out.println("Je voulais "+quantiteSouhaitee+" sangliers, j'en ai acheté "+ (quantiteSouhaitee-quantiteAcheter));
+		
+		System.out.println("Je voulais "+quantiteSouhaitee+" sangliers, j'en ai acheté "+ (quantiteAchetee));
 		
 		System.out.println("ETAT MARCHE");
 		for (int i = 0; i < marche.length; i++) {

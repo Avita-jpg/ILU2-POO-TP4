@@ -21,7 +21,7 @@ public class Sanglier extends Produit {
 	@Override
 	public double calculerPrix(int prix) {
 		// le prix calculé correspond au prix par kg (en paramètre) * le poids en kg
-		return (double)prix * poids;
+		return ((double)prix * poids)/1000;
 	}
 
 }

@@ -7,14 +7,13 @@ import produit.Sanglier;
 import village.IVillage;
 import villagegaulois.DepenseMarchand;
 import villagegaulois.IEtal;
-import villagegauloisold.Etal;
+import villagegaulois.Etal;
 
 public class Scenario {
 
 	public static void main(String[] args) {
-
-		// TODO Partie 4 : creer de la classe anonyme Village
 		
+		// debut classe Village
 		class Village implements IVillage {
 			IEtal[] marche; //????
 			int nbEtalsOccupes = 0;
@@ -47,10 +46,24 @@ public class Scenario {
 						quantiteAAcheter = qteDispo;
 					}
 					double prixPaye = marche[numEtal].acheterProduit(quantiteAAcheter);
+					quantiteAchetee += quantiteAAcheter;
 					depense[numEtal] = new DepenseMarchand(marche[numEtal].getVendeur(), quantiteAAcheter, produit, prixPaye);
 					numEtal++;
 				}
-			}	
+				return depense;
+			}
+			@Override
+			public String toString() {
+				StringBuilder chaine = new StringBuilder();
+				for (int i = 0; i < marche.length; i++) {
+					chaine.append(marche[i].etatEtal());
+					chaine.append("\n");
+				}
+				return chaine.toString();
+			}
+			
+			
+			
 		}
 		
 		Village village = new Village(3);
@@ -76,9 +89,8 @@ public class Scenario {
 		Poisson poisson1 = new Poisson("lundi");
 		Poisson[] poissons = { poisson1 };
 
-		
-		village.installerVendeur(etalSanglierAsterix, asterix, sangliersAsterix, 10);
-		village.installerVendeur(etalSanglierObelix, obelix, sangliersObelix, 8);
+		village.installerVendeur(etalSanglierAsterix, asterix, sangliersAsterix, 8);
+		village.installerVendeur(etalSanglierObelix, obelix, sangliersObelix, 10);
 		village.installerVendeur(etalPoisson, ordralfabetix, poissons, 5);
 
 		System.out.println(village);
